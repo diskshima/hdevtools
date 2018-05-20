@@ -23,8 +23,8 @@ daemonize exit program = do
         exitImmediately ExitSuccess
 
     child2 = do
-        -- mapM_ closeFd [stdInput, stdOutput, stdError]
-        -- nullFd <- openFd "/dev/null" ReadWrite Nothing defaultFileFlags
-        -- mapM_ (dupTo nullFd) [stdInput, stdOutput, stdError]
-        -- closeFd nullFd
+        mapM_ closeFd [stdInput, stdOutput, stdError]
+        nullFd <- openFd "/dev/null" ReadWrite Nothing defaultFileFlags
+        mapM_ (dupTo nullFd) [stdInput, stdOutput, stdError]
+        closeFd nullFd
         program
